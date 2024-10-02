@@ -4,8 +4,6 @@ import random
 from tkinter import messagebox
 
 
-
-
 latitude = 55.748082          # Широта 
 longitude = 37.680212         # Долгота
 
@@ -13,13 +11,13 @@ living_space = 19e4           # Жилая площадь (население) [
 working_space = 21.4e4        # Нежилая площадь (рабочие места) [m^2]
 
 first_living = 25             # Поэтажная жилая площадь (1 категория) [m^2]
-average_home_1 = 2            # Среднее число жильцов в площади первой категории // добавили сами
+average_home_1 = 2            # Среднее число жильцов в площади первой категории // коэффициент, который мы добавили сами
 second_living = 45            # Поэтажная жилая площадь (2 категория) [m^2]
-average_home_2 = 3            # Среднее число жильцов в площади второй категории // добавили сами
-N = 5000                      # Количество квартир первого типа                  // добавили сами
+average_home_2 = 3            # Среднее число жильцов в площади второй категории // коэффициент, который мы добавили сами
+N = 5000                      # Количество квартир первого типа                  // коэффициент, который мы добавили сами
 
-first_office = 35             # Среднее значение площади офиса [m^2], "first", потому что ну вдруг вам захочется еще типы офисов забабахать......
-average_number_work = 6       # Среднее количество работников на один офис [чел./офис] // добавили сами
+first_office = 35             # Среднее значение площади офиса [m^2]
+average_number_work = 6       # Среднее количество работников на один офис [чел./офис] // коэффициент, который мы добавили сами
 
 coeff_working_people = 0.57   # Доля трудоспособного населения
 people_with_IT = 0.3          # Доля использующих индивидуальный транспорт
@@ -37,7 +35,7 @@ station_limits = [16e3, 16e3, 5e3]           # Максимальная нагр
 # Гжельский пер. / ул. Сергея Радонежского / ул. Золоторожский Вал
 traffic_rush = [150, 2400, 300]       # Количество машин в час пик [машин/час]
 traffic_points = [3, 7, 5]            # Загруженность дороги в баллах
-traffic_lane = [1, 3, 1] # Количество полос
+traffic_lane = [1, 3, 1] # Количество полос // коэффициент, который мы добавили сами
 
 #Ищем следующие величины:
 residents=0
@@ -73,7 +71,7 @@ def calculate(living_space, working_space,first_living,average_home_1, second_li
     global overload_traffic_rush
 
     people_without_IT = 1. - people_with_IT        # Доля использующих общественный транспорт
-    traffic_limits = [int(traffic_rush[i]/traffic_points[i]*10) for i in range(len(traffic_rush))] # Максимальная загрузка дорог // посчитали сами
+    traffic_limits = [int(traffic_rush[i]/traffic_points[i]*10) for i in range(len(traffic_rush))] # Максимальная загрузка дорог 
     traffic_lane = [1, 3, 1] # Количество полос
     traffic_limits_per_one = [int(traffic_limits[i]/traffic_lane[i]) for i in range(len(traffic_limits))] # "Средняя загруженность" одной полосы
 
@@ -153,7 +151,6 @@ def calculate(living_space, working_space,first_living,average_home_1, second_li
 
     def load_problem(new_arr, limits):
       load=[]
-      # load.clear()
       for i in range(len(new_arr)):
         if new_arr[i] - limits[i] > 0:
           load.append(new_arr[i] - limits[i])
@@ -1081,5 +1078,3 @@ def print_results():
 
 # Запуск цикла обработки событий
 root.mainloop()
-
-
